@@ -1,63 +1,149 @@
-import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+import java.io.File;
+/*
+Name: Kevin L
+Project: A Zookeeper Interface
+*/
 
-public class Zookeeper {
-    public static void main(String[] args) {
+class Zookeeper
+{
+    static void animalCam(int fileNum)
+    {
 
-        System.out.println("What camera do you want to see: ");
-        System.out.println("1. Camel\n2.Hippo");
-        Scanner input = new Scanner(System.in);
-        int cameraChoice = input.nextInt();
-        if(cameraChoice == 1){
-            printCamel();
-        }
-        else if(cameraChoice == 2){
-            ;
-        }
+        File fileOne = new File("Zookeeper/animals/camel.txt");
+        File fileTwo = new File("Zookeeper/animals/fish.txt");
+        File fileThree = new File("Zookeeper/animals/dog.txt");
+        File fileFour = new File("Zookeeper/animals/cat.txt");
 
-        File file = new File("Zookeeper/animals/hippo.txt");
-        try{
-            Scanner fr = new Scanner(file);
-            while(fr.hasNextLine()){
-                String i = fr.nextLine();
-                System.out.println(i);
-            }
-        } catch (Exception e){
-            System.out.println("No file");
+        switch (fileNum)
+        {
+            case 1:
+                try
+                {
+                    Scanner animalScanner = new Scanner(fileOne);
+                    while(animalScanner.hasNextLine())
+                    {
+                        String a = animalScanner.nextLine();
+                        System.out.println(a);
+                    }
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+                break;
+
+            case 2:
+                try
+                {
+                    Scanner animalScanner = new Scanner(fileTwo);
+                    while(animalScanner.hasNextLine())
+                    {
+                        String a = animalScanner.nextLine();
+                        System.out.println(a);
+                    }
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+                break;
+
+            case 3:
+                try
+                {
+                    Scanner animalScanner = new Scanner(fileThree);
+                    while(animalScanner.hasNextLine())
+                    {
+                        String a = animalScanner.nextLine();
+                        System.out.println(a);
+                    }
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+                break;
+
+            case 4:
+                try
+                {
+                    Scanner animalScanner = new Scanner(fileFour);
+                    while(animalScanner.hasNextLine())
+                    {
+                        String a = animalScanner.nextLine();
+                        System.out.println(a);
+                    }
+                }
+                catch (FileNotFoundException e)
+                {
+                    e.printStackTrace();
+                }
+                break;
         }
     }
 
-    public static void printCamel(){
-        String animalType = "Camel";
-        String time = "4:37PM";
-        double habitatTemp = 59.66;
-        System.out.println("Animal type: " + animalType);
-        System.out.println("Current time: " + time);
-        System.out.println("Habitat temperature: " + habitatTemp+"F");
+    static void animalAssignment(String animalSelection)
+    {
+        Random random = new Random();
+        double randomOne = random.nextDouble(50,100);
 
+        DateTimeFormatter a = DateTimeFormatter.ofPattern("hh:mm");
 
-        String camel = """
-            Look at our camel
-            
-             ___.-''''-.
-            /___  @    |
-            ',,,,.     |         _.'''''''._
-                 '     |        /           \\
-                 |     \\    _.-'             \\
-                 |      '.-'                  '-.
-                 |                               ',
-                 |                                '',
-                  ',,-,                           ':;
-                       ',,| ;,,                 ,' ;;
-                          ! ; !'',,,',',,,,'!  ;   ;:
-                         : ;  ! !       ! ! ;  ;   :;
-                         ; ;   ! !      ! !  ; ;   ;,
-                        ; ;    ! !     ! !   ; ;     
-                        ; ;    ! !    ! !     ; ;
-                       ;,,      !,!   !,!     ;,;
-                       /_I      L_I   L_I     /_I
-        
-                """;
-        System.out.println(camel);
+        System.out.println("Animal type: " + animalSelection);
+        System.out.println("Current time: " + LocalTime.now().format(a));
+        System.out.printf("Current temperature: %.2f\n", randomOne);
+        System.out.println();
+    }
+
+    public static void main(String args[])
+    {
+        int numberCode;
+        do
+        {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.print("Which index do you want to access?\n1.Camel\n2.Fish\n3.Dog\n4.Cat\nInsert here> ");
+            int animalIndex = scanner.nextInt();
+            System.out.println();
+
+            switch (animalIndex)
+            {
+                case 1:
+                    animalAssignment("Camel");
+                    animalCam(1);
+                    break;
+
+                case 2:
+                    animalAssignment("Fish");
+                    animalCam(2);
+                    break;
+
+                case 3:
+                    animalAssignment("Dog");
+                    animalCam(3);
+                    break;
+
+                case 4:
+                    animalAssignment("Cat");
+                    animalCam(4);
+                    break;
+
+                default:
+                    System.out.println("Invalid!");
+                    System.out.println();
+                    break;
+
+            }
+            System.out.print("Wanna go again? Enter a NUMBER. Exit code is -1> ");
+            numberCode = scanner.nextInt();
+            System.out.println();
+
+        }
+        while(numberCode != -1);
     }
 }
